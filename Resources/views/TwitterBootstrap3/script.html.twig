@@ -1,0 +1,23 @@
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+<script type="text/javascript" src="{{ asset('vendor/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('vendor/blueimp-file-upload/js/jquery.iframe-transport.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/blueimp-file-upload/js/jquery.fileupload.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('bundles/cekurteuploader/js/image-uploader.js') }}"></script>
+
+<script type="text/javascript">
+    {%- if endpoint is iterable -%}
+        {%- for currentEndpoint in endpoint -%}
+            {%- include 'CekurteUploaderBundle:TwitterBootstrap3:image-uploader.js.twig' with {
+                'endpoint': currentEndpoint
+            } -%}
+        {%- endfor -%}
+    {%- else -%}
+        {%- include 'CekurteUploaderBundle:TwitterBootstrap3:image-uploader.js.twig' with {
+            'endpoint': endpoint
+        } -%}
+    {%- endif -%}
+</script>

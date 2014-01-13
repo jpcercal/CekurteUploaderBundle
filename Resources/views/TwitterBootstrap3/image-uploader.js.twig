@@ -1,0 +1,21 @@
+jQuery(document).ready(function($) {
+
+    $(document).imageUploader({
+        'uploadField'       : 'input[type="file"]#{{ endpoint }}_fileupload',
+        'imageField'        : 'img#{{ endpoint }}_image',
+        'inputHiddenField'  : 'input[type="hidden"].{{ endpoint }}',
+        'addBtnBootstrap'   : true
+    });
+
+    $('input[type="file"]#{{ endpoint }}_fileupload').on('updatethumbnail', function(event, thumbnailUrl) {
+
+        $(this).after(
+            $('#container-thumbnail-{{ endpoint }}')
+                .removeClass('hide')
+                .append($('img#{{ endpoint }}_image'))
+        );
+
+        return false;
+    });
+
+});

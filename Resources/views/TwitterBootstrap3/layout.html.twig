@@ -1,0 +1,18 @@
+{%- set showImage = (image is defined and image != '') ? image : ''     -%}
+{%- set showLabel = (label is defined and label != '') ? label : 'Foto' -%}
+
+{%- block form_open -%}<form role="form" class="form-horizontal">{%- endblock -%}
+    {%- block container_open -%}<div class="form-group">{%- endblock -%}
+        {%- block column_left_open -%}<div class="col-lg-2">{%- endblock -%}
+            {%- block label -%}<label for="fileupload">{{ showLabel }}</label>:{%- endblock -%}
+        {%- block column_left_close -%}</div>{%- endblock -%}
+        {%- block column_right_open -%}<div class="col-lg-10">{%- endblock -%}
+            {%- block input_file -%}<input type="file" id="{{ endpoint }}_fileupload" name="files[]" class="btn btn-success hide" data-url="{{ oneup_uploader_endpoint(endpoint) }}">{%- endblock -%}
+            {%- block container_thumbnail_open -%}<div id="container-thumbnail-{{ endpoint }}" class="well{%- if showImage == '' %} hide{%- endif -%}" style="margin-top: 20px;">{%- endblock -%}
+                {%- block thumbnail -%}
+                    <img src="{% if showImage != '' %}{{ showImage | imagine_filter(endpoint ~ '_thumbnail') }}{% endif %}" class="img-thumbnail" id="{{ endpoint }}_image">
+                {%- endblock -%}
+            {%- block container_thumbnail_close -%}</div>{%- endblock -%}
+        {%- block column_right_close -%}</div>{%- endblock -%}
+    </div>
+</form>
