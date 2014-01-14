@@ -23,4 +23,10 @@ public function registerBundles()
 }
 ```
 
+Agora instale a dependencia do front-end utilizando o bower.
+
+```bash
+$ bower install "blueimp-file-upload#9.5.1"
+```
+
 [Voltar para o Index](index.md) - [Ver a Configuração](configuracao.md)

@@ -1,5 +1,37 @@
 # Configuração
 
+## Routing
+
+No seu arquivo de configuração de rotas `app/config/routing.yml` adicione a seguinte entrada:
+
+```yml
+# app/config/routing.yml
+
+# ...
+# ------------------------------------------------------------------------------
+# CekurteUploaderBundle
+
+_imagine:
+    resource:   .
+    type:       imagine
+
+oneup_uploader:
+    resource:   .
+    type:       uploader
+
+cekurte_uploader:
+    resource:   "@CekurteUploaderBundle/Controller/"
+    type:       annotation
+    prefix:     /uploader/
+
+# ------------------------------------------------------------------------------
+# FOSJsRoutingBundle
+
+fos_js_routing:
+    resource:   "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+# ...
+```
+
 ## FOSJsRoutingBundle
 
 No seu arquivo de configuração `app/config/config.yml` adicione a seguinte entrada:
