@@ -20,12 +20,6 @@ private $imagem;
 
 // ...
 
-/**
- * Set imagem
- *
- * @param string $imagem
- * @return Post
- */
 public function setImagem($imagem)
 {
     $this->imagem = $imagem;
@@ -33,11 +27,8 @@ public function setImagem($imagem)
     return $this;
 }
 
-/**
- * Get imagem
- *
- * @return string
- */
+// ...
+
 public function getImagem()
 {
     return $this->imagem;
