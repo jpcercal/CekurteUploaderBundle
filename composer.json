@@ -10,9 +10,6 @@
             "homepage": "http://sistemas.cekurte.com/"
         }
     ],
-    "require": {
-        "cekurte/liipajaxbundle": "dev-master"
-    },
     "autoload": {
         "psr-0": { "Cekurte\\UploaderBundle": "" }
     },
