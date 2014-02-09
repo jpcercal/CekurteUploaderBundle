@@ -12,12 +12,14 @@
     {%- if endpoint is iterable -%}
         {%- for currentEndpoint in endpoint -%}
             {%- include 'CekurteUploaderBundle:TwitterBootstrap3:image-uploader.js.twig' with {
-                'endpoint': currentEndpoint
+                'endpoint': currentEndpoint,
+                'is_image': is_image is defined ? is_image : true
             } -%}
         {%- endfor -%}
     {%- else -%}
         {%- include 'CekurteUploaderBundle:TwitterBootstrap3:image-uploader.js.twig' with {
-            'endpoint': endpoint
+            'endpoint': endpoint,
+            'is_image': is_image is defined ? is_image : true
         } -%}
     {%- endif -%}
 </script>

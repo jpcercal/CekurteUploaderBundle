@@ -7,15 +7,60 @@ jQuery(document).ready(function($) {
         'addBtnBootstrap'   : true
     });
 
-    $('input[type="file"]#{{ endpoint }}_fileupload').on('updatethumbnail', function(event, thumbnailUrl) {
+    {%- if is_image == true -%}
 
-        $(this).after(
-            $('#container-thumbnail-{{ endpoint }}')
-                .removeClass('hide')
-                .append($('img#{{ endpoint }}_image'))
-        );
+        $('input[type="file"]#{{ endpoint }}_fileupload').on('fileuploaddone', function (e, data) {
 
-        return false;
-    });
+            var routeUrl = Routing.generate('cekurte_ajax_liipimagine_uploader', {
+                mapping     : data.result.mapping,
+                filter      : data.result.mapping + '_thumbnail',
+                filename    : data.result.filename
+            });
 
+            $.get(routeUrl, function (response) {
+
+                $('input[type="file"]#{{ endpoint }}_fileupload').trigger('updatethumbnail', [response.url]);
+
+                $('input[type="file"]#{{ endpoint }}_fileupload').trigger('updatedatabase', [data.result]);
+            });
+        });
+
+        $('input[type="file"]#{{ endpoint }}_fileupload').on('updatethumbnail', function(event, thumbnailUrl) {
+
+            $(this).after(
+                $('#container-thumbnail-{{ endpoint }}')
+                    .removeClass('hide')
+                    .append($('img#{{ endpoint }}_image'))
+            );
+
+            return false;
+        });
+
+    {%- else -%}
+
+        $('input[type="file"]#{{ endpoint }}_fileupload').on('fileuploaddone', function (e, data) {
+
+            var uploadFile = data.result.path + '/' + data.result.filename;
+
+            $('input[type="file"]#{{ endpoint }}_fileupload').trigger('updatethumbnail', [uploadFile, data.originalFiles[0].name]);
+        });
+
+        $('input[type="file"]#{{ endpoint }}_fileupload').on('updatethumbnail', function(event, url, filename) {
+
+            var container = $('#container-thumbnail-{{ endpoint }}');
+
+            $(this).after(
+                $(container)
+                    .removeClass('hide')
+                    .html(
+                        $('a', container)
+                            .attr('href', $('a', container).data('base-path') + '/' + url)
+                            .html(filename)
+                    )
+            );
+
+            return false;
+        });
+
+    {%- endif -%}
 });

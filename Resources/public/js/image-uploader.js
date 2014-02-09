@@ -102,22 +102,9 @@ jQuery(document).ready(function($)
 
         $(options.uploadField).on('fileuploaddone', function (e, data) {
 
-            var routeUrl = Routing.generate('cekurte_ajax_liipimagine_uploader', {
-                mapping     : data.result.mapping,
-                filter      : data.result.mapping + '_thumbnail',
-                filename    : data.result.filename
-            });
-
             var uploadFile = data.result.path + '/' + data.result.filename;
 
             $(options.uploadField).trigger('updatehidden', [uploadFile]);
-
-            $.get(routeUrl, function (response) {
-
-                $(options.uploadField).trigger('updatethumbnail', [response.url]);
-
-                $(options.uploadField).trigger('updatedatabase', [data.result]);
-            });
         });
 
         /**

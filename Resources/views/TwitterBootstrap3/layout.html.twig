@@ -10,7 +10,11 @@
             {%- block input_file -%}<input type="file" id="{{ endpoint }}_fileupload" name="files[]" class="btn btn-success hide" data-url="{{ oneup_uploader_endpoint(endpoint) }}">{%- endblock -%}
             {%- block container_thumbnail_open -%}<div id="container-thumbnail-{{ endpoint }}" class="well{%- if showImage == '' %} hide{%- endif -%}" style="margin-top: 20px;">{%- endblock -%}
                 {%- block thumbnail -%}
-                    <img src="{% if showImage != '' %}{{ showImage | imagine_filter(endpoint ~ '_thumbnail') }}{% endif %}" class="img-thumbnail" id="{{ endpoint }}_image">
+                    {%- if is_image is not defined or is_image == true -%}
+                        <img src="{% if showImage != '' %}{{ showImage | imagine_filter(endpoint ~ '_thumbnail') }}{% endif %}" class="img-thumbnail" id="{{ endpoint }}_image">
+                    {%- else -%}
+                        <a class="btn btn-default" href="{% if showImage != '' %}{{ asset(showImage) }}{% else %}#{% endif %}" data-base-path="{{ app.request.basepath }}" target="_blank">{{ showImage }}</a>
+                    {%- endif -%}
                 {%- endblock -%}
             {%- block container_thumbnail_close -%}</div>{%- endblock -%}
         {%- block column_right_close -%}</div>{%- endblock -%}
