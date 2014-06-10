@@ -26,6 +26,7 @@ jQuery(document).ready(function($)
             'uploadField'       : '#fileupload',
             'imageField'        : '#profile',
             'inputHiddenField'  : '.input-picture',
+            'btnField'          : null,
             'addBtnBootstrap'   : false,
         };
 
@@ -53,7 +54,9 @@ jQuery(document).ready(function($)
                 .addClass('btn')
                 .addClass('btn-success')
                 .addClass(cssClass)
+                .attr('type', 'button')
                 .attr('id', id)
+                .attr('data-loading-text', 'Carregando ...')
                 .text('Selecione um arquivo')
             ;
 
@@ -62,9 +65,13 @@ jQuery(document).ready(function($)
                 .before(button)
             ;
 
+            options.btnField = $(options.uploadField).parent().find('button[type="button"]');
+
             $(document).on('click', '#' + id, function() {
 
                 $(options.uploadField).trigger('click');
+
+                $(options.btnField).button('loading');
 
                 return false;
             });
@@ -80,6 +87,8 @@ jQuery(document).ready(function($)
         $(options.uploadField).on('updatehidden', function(event, thumbnailUrl) {
 
             $(options.inputHiddenField).val(thumbnailUrl);
+
+            $(options.btnField).button('reset');
 
             return false;
         });
