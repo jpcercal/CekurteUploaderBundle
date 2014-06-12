@@ -19,6 +19,12 @@ jQuery(document).ready(function($)
          * inputHiddenField: o campo hidden no formulário que irá
          * armazenar o nome do arquivo de upload para salva-lo no
          * banco de dados (input type="hidden")
+         * 
+         * btnField: o campo que corresponde ao elemento button[type="button"]
+         * no qual é disparado o evento click fake de um input[type="file"]
+         * 
+         * addBtnBootstrap: se verdadeiro adiciona um botão utilizando os estilos
+         * do Twitter Bootstrap 3
          *
          * @type {Object}
          */
@@ -65,13 +71,17 @@ jQuery(document).ready(function($)
                 .before(button)
             ;
 
-            options.btnField = $(options.uploadField).parent().find('button[type="button"]');
+            if (options.btnField !== null) {
+                options.btnField = $(options.uploadField).parent().find('button[type="button"]');
+            }
 
             $(document).on('click', '#' + id, function() {
 
                 $(options.uploadField).trigger('click');
 
-                $(options.btnField).button('loading');
+                if (options.btnField !== null) {
+                    $(options.btnField).button('loading');
+                }
 
                 return false;
             });
@@ -88,7 +98,9 @@ jQuery(document).ready(function($)
 
             $(options.inputHiddenField).val(thumbnailUrl);
 
-            $(options.btnField).button('reset');
+            if (options.btnField !== null) {
+                $(options.btnField).button('reset');
+            }
 
             return false;
         });
