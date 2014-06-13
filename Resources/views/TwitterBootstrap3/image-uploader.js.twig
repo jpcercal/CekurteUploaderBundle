@@ -4,7 +4,7 @@ jQuery(document).ready(function($) {
         'uploadField'       : 'input[type="file"]#{{ endpoint }}_fileupload',
         'imageField'        : 'img#{{ endpoint }}_image',
         'inputHiddenField'  : 'input[type="hidden"].{{ endpoint }}',
-        'addBtnBootstrap'   : true
+        'addBtnBootstrap'   : {{ addBtnBootstrap == false ? 'false' : 'true' }}
     });
 
     {%- if is_image == true -%}

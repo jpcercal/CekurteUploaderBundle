@@ -13,13 +13,15 @@
         {%- for currentEndpoint in endpoint -%}
             {%- include 'CekurteUploaderBundle:TwitterBootstrap3:image-uploader.js.twig' with {
                 'endpoint': currentEndpoint,
-                'is_image': is_image is defined ? is_image : true
+                'is_image': is_image is defined ? is_image : true,
+                'addBtnBootstrap': addBtnBootstrap is defined ? addBtnBootstrap : true
             } -%}
         {%- endfor -%}
     {%- else -%}
         {%- include 'CekurteUploaderBundle:TwitterBootstrap3:image-uploader.js.twig' with {
             'endpoint': endpoint,
-            'is_image': is_image is defined ? is_image : true
+            'is_image': is_image is defined ? is_image : true,
+            'addBtnBootstrap': addBtnBootstrap is defined ? addBtnBootstrap : true
         } -%}
     {%- endif -%}
 </script>
